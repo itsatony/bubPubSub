@@ -1,0 +1,14 @@
+{
+	"name"          : "bubpubsub",
+	"description"   : "a pubsub system with bubbling, replies and persistence",
+	"url"           : "http://github.com/itsatony/bubpubsub",
+	"keywords"      : ["pubsub", "events", "publish", "subscribe", "bubbling", "persistence", "VisualWeb"],
+	"author"        : "Toni Wagner <i@itsatony.com>",
+	"contributors"  : [],
+	"licenses"      : ["MIT"],
+	"dependencies"  : [],
+	"main"          : "./lib/bubpubsub",
+	"version"       : "0.7.0",
+	"directories"   : { "lib": "./lib" },
+	"engines"       : { "node": "> 0.1.90" }
+}
