@@ -5,10 +5,10 @@
 	"keywords"      : ["pubsub", "events", "publish", "subscribe", "bubbling", "persistence", "VisualWeb"],
 	"author"        : "Toni Wagner <i@itsatony.com>",
 	"contributors"  : [],
-	"licenses"      : ["MIT"],
+	"licenses"      : ["free"],
 	"dependencies"  : [],
 	"main"          : "./lib/bubpubsub",
-	"version"       : "0.7.0",
+	"version"       : "0.7.1",
 	"directories"   : { "lib": "./lib" },
 	"engines"       : { "node": "> 0.1.90" }
 }

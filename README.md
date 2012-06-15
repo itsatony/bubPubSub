@@ -1,19 +1,18 @@
 
 # bubPubSub
 
-bubPubSub (VisualWeb's PubSub) is a publish/subscribe system for communication between objects/modules of your code. It's rather similar to the event system of node, however with two additions:
+bubPubSub (VisualWeb's PubSub) is a publish/subscribe system for communication between objects/modules of your code. 
+It's rather similar to common pubSub systems, but closer related to the event system of nodeJS or the browser. USP's are
 
--- (optional) BUBBLING along a topic-tree 
+* (optional) BUBBLING along a topic-tree 
  
--- (optional) PERSISTANCE of publications for later retrieval/reference
+* (optional) PERSISTENCE of publications for later retrieval/reference
 
-It contains utilitiary functions that were copied (and adapted) from the jQuery (http://www.jquery.com) library. 
-
-It is developed, used and sponsored by K.lab (http://www.klab-berlin.com), LinkCloud (http://www.linkcloud.org) and ViSERiON (http://www.viserion.com) .
+It is developed, used and sponsored by LinkCloud (http://www.mylinkcloud.com), K.lab (http://www.klab-berlin.com), and ViSERiON (http://www.viserion.com) .
 
 ## compatibility
 
-    bubPubSub works on both the client (e.g. with jQuery - or without it) and the server (nodeJS).
+    bubPubSub works on both ends, the client and the server (nodeJS).
 
 ## Installation with nodeJS
 
@@ -23,6 +22,24 @@ It is developed, used and sponsored by K.lab (http://www.klab-berlin.com), LinkC
 
 	cd to node_modules/bubpubsub
 	make
+
+## VERSION HISTORY:
+ 
+ 	- v0.71 15.06.12
+ 		- made the code a bit more beautiful
+ 		- introduced forceUniqueSubscriber to allow replacing subscriber methods by Id
+ 		- replaced isFunction method by typeof test 
+ 		- removed randomString method
+ 		- switched from bad style == to good style === operators... 
+ 		- changed licence
+ 	- v0.70 21.03.12
+ 		- renamed
+ 		- fused client (jQuery) and server (nodeJS) versions
+ 		- series of bugfixes
+ 	- v0.60	29.10.11			
+ 		- removed dependencies from jQuery. 
+ 		- enabled using the same file for client- and nodeJS server-side implementation
+ 		- added the reply function explicitely
 
 ## Usage
 
