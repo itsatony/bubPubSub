@@ -1,9 +1,13 @@
-var sys = require('sys');
+var sys = require('util');
 var pubsub = require('../lib/bubpubsub');
 
 sys.puts("############## bubpubsub TESTs #########");
 
 var myPubSub = new pubsub();
+
+myPubSub.setDefaults({
+	debugging: 1
+});
 
 function report(text) {
 	sys.puts(text);
@@ -22,17 +26,36 @@ var pubsubTests = {
 }
 
 
-myPubSub.subscribe('/politics/europe/germany', myLittleListener,  false, 'myLittleListener#1');
+function myLittleListener(data, currentBranch, publisher) { 
+	sys.puts("---- [2] straight subscription");
+	sys.puts('[2] subscribed without getBubbles to /politics/europe/germany and received publication on: '+data.originalTopic); 
+	sys.puts('[2] caught this topic: '+currentBranch); 
+	sys.puts('[2] publisher was: '+publisher); 
+	pubsubTests['[2] receive without bubbles'] = true;
+};
+
+
+var myFirstSubscription = myPubSub.subscribe(
+	'/politics/europe/germany',
+	myLittleListener,  
+	false, 
+	'myLittleListener1'
+);
 
 
 
-var mySecondSubscription = myPubSub.subscribe('/politics', function(data, currentBranch, publisher) { 
+var mySecondSubscription = myPubSub.subscribe(
+	'/politics', 
+	function(data, currentBranch, publisher) { 
 		sys.puts("---- [3] bubbled subscription");
 		sys.puts('[3] subscribed with getBubbles to /politics and received publication on: '+data.originalTopic); 
 		sys.puts('[3] caught this topic: '+currentBranch); 
 		sys.puts('[3] publisher was: '+publisher); 
 		pubsubTests['[3] receive with bubbles'] = true;
-	},  true, 'myLittleListener#2');
+	},  
+	true, 
+	'myLittleListener#2'
+);
 
 
 
@@ -46,7 +69,12 @@ sys.puts('[1] with content: '+pubData.content);
 sys.puts('[1] as publisher: '+pubId); 
 sys.puts('[1] allowed bubbling'); 
 sys.puts('[1] WITH persistence1'); 
-myPubSub.publish(pubTopic, pubData,  { bubble:true,persist:true }, pubId);
+myPubSub.publish(
+	pubTopic, 
+	pubData, 
+	{ bubble:true, persist:true }, 
+	pubId
+);
 pubsubTests['[1] publish with Bubbles and Persistence'] = true;
 
 
@@ -60,7 +88,12 @@ sys.puts('[4] with content: '+pubData.content);
 sys.puts('[4] as publisher: '+pubId); 
 sys.puts('[4] allowed bubbling'); 
 sys.puts('[4] NO persistence'); 
-myPubSub.publish(pubTopic, pubData,  { bubble:true,persist:false }, pubId);
+myPubSub.publish(
+	pubTopic, 
+	pubData, 
+	{ bubble:true,persist:false }, 
+	pubId
+);
 pubsubTests['[4] publish with Bubbles and NO Persistence'] = true;
 
 
@@ -74,7 +107,12 @@ sys.puts('[5] with content: '+pubData.content);
 sys.puts('[5] as publisher: '+pubId); 
 sys.puts('[5] NO bubbling'); 
 sys.puts('[5] WITH persistence'); 
-myPubSub.publish(pubTopic, pubData,  { bubble:false,persist:true }, pubId);
+myPubSub.publish(
+	pubTopic, 
+	pubData, 
+	{ bubble:false,persist:true }, 
+	pubId
+);
 pubsubTests['[5] publish with NO Bubbles and Persistence'] = true;
 
 
@@ -107,14 +145,3 @@ for (var name in pubsubTests) {
 	var res = (pubsubTests[name]) ? "PASSED" : "failed";
 	sys.puts('***** '+res+' ... PubSub test '+name);
 }
-
-
-
-function myLittleListener(data, currentBranch, publisher) { 
-	sys.puts("---- [2] straight subscription");
-	sys.puts('[2] subscribed without getBubbles to /politics/europe/germany and received publication on: '+data.originalTopic); 
-	sys.puts('[2] caught this topic: '+currentBranch); 
-	sys.puts('[2] publisher was: '+publisher); 
-	pubsubTests['[2] receive without bubbles'] = true;
-}
-	
