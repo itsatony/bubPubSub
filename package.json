@@ -8,11 +8,7 @@
 	"licenses"      : ["free"],
 	"dependencies"  : [],
 	"main"          : "./lib/bubpubsub",
-<<<<<<< HEAD
-	"version"       : "0.7.2",
-=======
-	"version"       : "0.7.1",
->>>>>>> 6549c7d890ae0fc7f584e454e897124143ca3f35
+	"version"       : "0.8.4",
 	"directories"   : { "lib": "./lib" },
-	"engines"       : { "node": "> 0.1.90" }
+	"engines"       : { "node": "> 0.6" }
 }
