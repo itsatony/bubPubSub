@@ -1,4 +1,4 @@
 test:
-	@@node test/test_vw.bubpubsub.js
+	@@node test/test_bubpubsub.js
 
 .PHONY: test
