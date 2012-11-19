@@ -8,7 +8,7 @@ It's rather similar to common pubSub systems, but closer related to the event sy
  
 * (optional) PERSISTENCE of publications for later retrieval/reference
 
-It is developed, used and sponsored by LinkCloud (http://www.mylinkcloud.com), K.lab (http://www.klab-berlin.com), and ViSERiON (http://www.viserion.com) .
+It is developed, used and sponsored by myLinkCloud (http://www.mylinkcloud.com), meinUnterricht (http://www.meinUnterricht.de), K.lab (http://www.klab-berlin.com), and ViSERiON (http://www.viserion.com) .
 
 ## compatibility
 
@@ -25,21 +25,38 @@ It is developed, used and sponsored by LinkCloud (http://www.mylinkcloud.com), K
 
 ## VERSION HISTORY:
  
- 	- v0.71 15.06.12
- 		- made the code a bit more beautiful
- 		- introduced forceUniqueSubscriber to allow replacing subscriber methods by Id
- 		- replaced isFunction method by typeof test 
- 		- removed randomString method
- 		- switched from bad style == to good style === operators... 
- 		- changed licence
- 	- v0.70 21.03.12
- 		- renamed
- 		- fused client (jQuery) and server (nodeJS) versions
- 		- series of bugfixes
- 	- v0.60	29.10.11			
- 		- removed dependencies from jQuery. 
- 		- enabled using the same file for client- and nodeJS server-side implementation
- 		- added the reply function explicitely
+	- v0.8.5 19.11.12
+		- bugFixes ..
+	- v0.8.4 15.11.12
+		- bugFixes ..
+		- old parameters for subscribe will be deprecated announcement
+	- v0.8.3 15.11.12
+		- introduced autoUnsubscribe to subscribe options ! 
+		- optional try-catch around subscribers
+		- scope setting for subscribers
+		- introduced limits for error and publication logs to 10000 items in order to limit memory usage.
+	- v0.82 28.07.2012
+		- bugfix in chain default and if check. 
+	- v0.81 27.07.12
+		- unsubscribe updated to do a better job of namespace (& memory) cleanup
+	- v0.80 22.06.12
+		- added the option to do chaining. this needs quite some field-testing ;)
+		- added chainDelay config setting for chained publications to allow breathing-time for the cpu 
+	- v0.71 15.06.12
+		- made the code a bit more beautiful
+		- introduced forceUniqueSubscriber to allow replacing subscriber methods by Id
+		- replaced isFunction method by typeof test 
+		- removed randomString method
+		- switched from bad style == to good style === operators... 
+		- changed licence
+	- v0.70 21.03.12
+		- renamed
+		- fused client (jQuery) and server (nodeJS) versions
+		- series of bugfixes
+	- v0.60	29.10.11			
+		- removed dependencies from jQuery. 
+		- enabled using the same file for client- and nodeJS server-side implementation
+		- added the reply function explicitely
 
 ## Usage
 
