@@ -22,7 +22,7 @@ var pubsubTests = {
 	'[4] publish with Bubbles and NO Persistence': false,
 	'[5] publish with NO Bubbles and Persistence': false,
 	'[6] retrieve persistent publications': false,
-	'[7] listing subscribers': false,	
+	'[7] listing subscribers': false,
 }
 
 
@@ -138,6 +138,20 @@ for (var key in myPubSub.publicationChannels) {
 	}
 }
 pubsubTests['[7] listing subscribers'] = true;
+
+
+
+sys.puts("---- [8] silent publish");
+var pubTopic = '/politics/CENSORED';
+var pubData = { content: "node module test #8" };
+var pubId = 'myTestPublisher8';
+myPubSub.publish(
+	pubTopic, 
+	pubData, 
+	{ bubble:false, persist:true, silent:true }, 
+	pubId
+);
+pubsubTests['[8] silent publish'] = true;
 
 
 
