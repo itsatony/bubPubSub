@@ -25,8 +25,8 @@ It is developed, used and sponsored by myLinkCloud (http://www.mylinkcloud.com),
 
 ## VERSION HISTORY:
 
-  - v0.8.6 22.11.12
-    - bugFix
+	- v0.8.6 22.11.12
+		- bugFix
 	- v0.8.5 19.11.12
 		- bugFixes ..
 	- v0.8.4 15.11.12
