@@ -24,7 +24,10 @@ It is developed, used and sponsored by myLinkCloud (http://www.mylinkcloud.com),
 	make
 
 ## VERSION HISTORY:
-
+	- v0.8.7 22.11.12
+		- introduced silent option as a per-publication flag to avoice console logging
+	- v0.8.6 22.11.12
+		- bugFix
 	- v0.8.6 22.11.12
 		- bugFix
 	- v0.8.5 19.11.12
