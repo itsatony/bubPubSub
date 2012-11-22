@@ -38,7 +38,7 @@ function myLittleListener(data, currentBranch, publisher) {
 var myFirstSubscription = myPubSub.subscribe(
 	'/politics/europe/germany',
 	myLittleListener,  
-	false, 
+	{ getBubbles: false },
 	'myLittleListener1'
 );
 
@@ -53,7 +53,7 @@ var mySecondSubscription = myPubSub.subscribe(
 		sys.puts('[3] publisher was: '+publisher); 
 		pubsubTests['[3] receive with bubbles'] = true;
 	},  
-	true, 
+	{ getBubbles: true },
 	'myLittleListener#2'
 );
 
