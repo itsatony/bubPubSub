@@ -208,11 +208,61 @@ describe('BubPubSub', function() {
 		done();
 	});
 	
-	/**
-	 * checks the wasPublishedOnTopic with fired parameter from subscriber
-	 */
-	it("should check wasPublishedOnTopic with fired parameter", function(done){
-		//TODO
+	
+	it("should check if the hole workflow is working", function(done){
+		var mySubscriberHub = myBubPubSub.subscribe(
+			'/a/b/c',
+			function(pubData, originalTopic, publisher){
+				//console.log("hier hört hin","/reply"+pubData.originalTopic+"/done");
+				myBubPubSub.publish(
+					"/reply"+pubData.originalTopic+"/done", 
+					{},
+					{	bubble : true, persist:false },
+					publisherName
+				);
+			},
+			{ getBubbles : true},
+			subscriberId
+		);
+		
+		
+		
+		var pubSub = '/a/b/c';
+		var subscriberId, mySubscriber;
+		var publisherName = 'myTestPublisher';
+		var j = 0;
+		
+		/**
+		 * publishes und subscribes 10 times.
+		 */
+		for(var i = 0; i < 10; i++){
+				var subscriberId = 'sub_' + i;		
+				var self = this;
+				self[mySubscriber+i] = myBubPubSub.subscribe(
+					'/reply' + pubSub +'/done',
+					function(pubData, originalTopic, publisher){
+						//console.log("!!!!!!!!!!!!!!!!!!!!!!!Subscriber Funktion wird aufgerufen!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						myBubPubSub.unsubscribe(self[mySubscriber+i]);
+						j--;				
+					},
+					{ getBubbles : true},
+					subscriberId
+				);
+				
+				var published = myBubPubSub.publish(
+					pubSub, 
+					{},
+					{	bubble : true, persist:false },
+					publisherName
+				);
+				j++;
+				//console.log(j);
+				published.subscribersFired.length.should.equal(1);
+		}
+		/**
+		 * checks if all elements are unsubscribed
+		 */	
+		j.should.equal(0);
 		done();
 	});
 });
