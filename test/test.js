@@ -158,4 +158,112 @@ describe('BubPubSub', function() {
 		done();
 	});
 
-}); 
+	
+	
+	
+	it("should unsubscribe", function(done){
+		var path = '/politics/europe';
+		var subscriptionName = 'myLittleListener';
+		
+		var mySubscription = myBubPubSub.subscribe(
+ 			path, 
+ 			function(data) { 
+ 				//console.log(data.originalTopic); 
+ 			},  
+ 			{ getBubbles: true, getPersists: false }, 
+ 			subscriptionName
+ 		);
+ 		
+ 		should.exist(myBubPubSub.publicationChannels[mySubscription.topic]);
+ 		var unsub = myBubPubSub.unsubscribe(mySubscription);
+ 		
+ 		myBubPubSub.publicationChannels.should.not.be.arguments;
+ 		done();
+	});
+	
+	/**
+	 * just checks if method returns true another test should check if the "fired parameter"
+	 * is getting bigger
+	 */
+	it(" should test if method wasPublishedOnTopic returns true", function(done){
+		var path = '/politics/europe';
+		var publishedPath = '/politics';
+		var content = 'this is wonderfool';
+		var publisherName = 'myTestPublisher';
+		var myPublisher = myBubPubSub.publish(
+ 			path, 
+ 			{ 
+ 				content: content,  
+			},
+			{ 
+				bubble:true, 
+				persist:true 
+			}, 
+			publisherName
+ 		);
+ 		//console.log(myBubPubSub);
+ 		//console.log('##########################################');
+ 		var matchingPubs = myBubPubSub.wasPublishedOnTopic(myPublisher.topic, true);
+ 		//console.log(matchingPubs);
+ 		matchingPubs[0].topic.should.equal(myPublisher.topic);
+ 		matchingPubs[0].data.content.should.equal(content);
+ 		matchingPubs[0].data.originalTopic.should.equal(myPublisher.topic);
+ 		matchingPubs[0].settings.bubble.should.equal(true);
+ 		matchingPubs[0].settings.persist.should.equal(true);
+ 		matchingPubs[0].publisher.should.equal(publisherName);
+ 		matchingPubs[0].subscribersFired.should.be.empty;
+ 		done();
+	});
+	
+	it(" should test the method chainCallSubscribers", function(done){
+		var publication = { topic: '/politics/europe',
+  							data: 
+   							{ content: 'this is wonderfool',
+     						  originalTopic: '/politics/europe',
+     						  uniquePublicationId: 'pub_1353948822809_88533' },
+  							  settings: { bubble: true, persist: true },
+  							  timestamp: 1353948822809,
+  							  publisher: 'myTestPublisher',
+  							  subscribersFired: [] 
+  						   };
+  						
+  		var config = { scope: 
+   						{ VERSION: '0.8.7',
+    					  id: 'bubpubsubId',
+     					  defaults: 
+      					  { bubble: true,
+        				    persist: false,
+        				    getBubbles: true,
+        				    getPersists: false,
+        				    chain: false,
+        					scope: [],
+        					debugging: 0,
+        					forceUniqueSubscriber: true,
+        					skipOverFailedSubscribers: true,
+        					chainDelay: 0,	
+        					throwErrors: false,
+        					catchSubscriberErrors: false },
+     					errors: [],
+     					publicationChannels: {},
+     					publicationLog: [],
+     					publicationAnnouncements: [] },
+  					persist: true,
+  					bubble: true,
+  					chain: false,
+  					chainDelay: 0,
+  					silent: false };
+
+
+		
+		(myBubPubSub.chainCallSubscribers(publication, config, [])).should.equal(true);
+		done();
+	});
+	
+	/**
+	 * checks the wasPublishedOnTopic with fired parameter from subscriber
+	 */
+	it("should check wasPublishedOnTopic with fired parameter", function(done){
+		//TODO
+		done();
+	});
+});
