@@ -123,22 +123,16 @@ describe('BubPubSub', function() {
 		done();
 	});
 
-/**
- *failed in publish() on line 274
- *
- */
 	it("should check converse method", function(done) {
 		var path = '/politics/europe';
-    var content = 'this is wonderfool';
-    var publisherName = 'myTestPublisher';
-    var myPublisher = myBubPubSub.publish(path, {
-      content : content,
-    }, {
-      bubble : true,
-      persist : true
-    }, publisherName);
-
-// console.log(publication);
+	    var content = 'this is wonderfool';
+	    var publisherName = 'myTestPublisher';
+	    var myPublisher = myBubPubSub.publish(path, {
+	      content : content,
+	    }, {
+	      bubble : true,
+	      persist : true
+	    }, publisherName);
 		var path = '/politics/europe';
 		var subscriberName = 'myLittleListener';
 		var mySubscription = myBubPubSub.subscribe("/reply" + path, function(currentBranch, publisher, reply) {
@@ -261,12 +255,21 @@ describe('BubPubSub', function() {
 	
 	
 	it("should check if the hole workflow is working", function(done){
+		var pubSub = '/a/b/c';
+		var subscriberId, mySubscriber;
+		var publisherName = 'myTestPublisher';
+		var mySubscriber = 'mySub';
+		var j = 0;
+		
 		var mySubscriberHub = myBubPubSub.subscribe(
 			'/a/b/c',
 			function(pubData, originalTopic, publisher){
 				//console.log("hier hört hin","/reply"+pubData.originalTopic+"/done");
 				myBubPubSub.publish(
-					"/reply"+pubData.originalTopic+"/done", 
+					/**
+					 * needs to be /reply/ because of strip function 
+					 */
+					"/reply/"+pubData.originalTopic+"/done", 
 					{},
 					{	bubble : true, persist:false },
 					publisherName
@@ -276,24 +279,17 @@ describe('BubPubSub', function() {
 			subscriberId
 		);
 		
-		
-		
-		var pubSub = '/a/b/c';
-		var subscriberId, mySubscriber;
-		var publisherName = 'myTestPublisher';
-		var j = 0;
-		
 		/**
 		 * publishes und subscribes 10 times.
 		 */
 		for(var i = 0; i < 10; i++){
 				var subscriberId = 'sub_' + i;		
 				var self = this;
-				self[mySubscriber+i] = myBubPubSub.subscribe(
+				self[mySubscriber + i] = myBubPubSub.subscribe(
 					'/reply' + pubSub +'/done',
 					function(pubData, originalTopic, publisher){
 						//console.log("!!!!!!!!!!!!!!!!!!!!!!!Subscriber Funktion wird aufgerufen!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-						myBubPubSub.unsubscribe(self[mySubscriber+i]);
+						myBubPubSub.unsubscribe(self[mySubscriber + i]);
 						j--;				
 					},
 					{ getBubbles : true},
