@@ -8,7 +8,7 @@
 	"licenses"      : ["free"],
 	"dependencies"  : [],
 	"main"          : "./lib/bubpubsub",
-	"version"       : "0.8.7",
+	"version"       : "0.9.0",
 	"directories"   : { "lib": "./lib" },
 	"engines"       : { "node": "> 0.6" }
 }
