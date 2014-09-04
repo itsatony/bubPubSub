@@ -1,4 +1,3 @@
-
 # bubPubSub
 
 bubPubSub (VisualWeb's PubSub) is a publish/subscribe system for communication between objects/modules of your code. 
@@ -68,7 +67,7 @@ It is developed, used and sponsored by myLinkCloud (http://www.mylinkcloud.com),
 	there is a detailed description of all functions in the source-code ... 
 
 ## examples (more in the source JS)
-
+```javascript
 		// SUBSCRIPTION TO a deep branch WITHOUT PICKING UP BUBBLES 
  		var myEuropeSubscription = aBubPubSub.subscribe(
  			'/politics/europe', 
@@ -133,4 +132,4 @@ It is developed, used and sponsored by myLinkCloud (http://www.mylinkcloud.com),
 	
 		// UNSUBSCRIBE
 		aBubPubSub.unsubscribe(myRootSubscription);
-	
+```	
