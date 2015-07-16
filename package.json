@@ -1,12 +1,15 @@
 {
 	"name"          : "bubpubsub",
 	"description"   : "a pubsub system with bubbling, replies and persistence",
-	"url"           : "http://github.com/itsatony/bubpubsub",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/itsatony/bubpubsub"
+	},
 	"keywords"      : ["pubsub", "events", "publish", "subscribe", "bubbling", "persistence" ],
 	"author"        : "Toni Wagner <i@itsatony.com>",
 	"contributors"  : [],
 	"licenses"      : ["free"],
-	"dependencies"  : [],
+	"dependencies"  : {},
 	"main"          : "./lib/bubpubsub",
 	"version"       : "0.10.0",
 	"directories"   : { "lib": "./lib" },
